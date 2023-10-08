@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveQuestion } from './Slices/QuestionSlice';
@@ -8,6 +8,11 @@ function PollCreationPage(props) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const userInfo = useSelector((state) => state.login.value);
+    useEffect(() => {
+        if(!userInfo.id){
+            navigate('/')
+        }
+    })
     const author = userInfo.id
     const [optionOne, setOptionOne] = useState('')
     const [optionTwo, setOptionTwo] = useState('')

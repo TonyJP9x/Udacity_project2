@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 function LeaderBoard(props) {
+  const navigate = useNavigate('')
   const data = useSelector(state => state.globalState.value)
   const userList = Object.values(data)
+  useEffect(() => {
+    if(userList.length == 0){
+      navigate('/')
+    }
+  },[data])
   return (
     <div >
       <NavBar />
