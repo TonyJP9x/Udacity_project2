@@ -38,6 +38,8 @@ function PollPage(props) {
     }else{
         voted = false;
     }
+    const result1 = (optionOneQty)/(optionOneQty + optionTwoQty)
+    const result2 = (optionTwoQty)/(optionOneQty + optionTwoQty)
 
     return (
         <div>
@@ -47,8 +49,8 @@ function PollPage(props) {
             <h3 hidden={voted}>Would You Rather</h3>
             <div className='container ' style={{paddingTop: '30px', paddingBottom:'30px'}} >
                 <div className='row'>
-                    <DetailPage option={optionOne} voted={voted} optionQty={{optionOneQty, optionTwoQty}} text={selectedQuestion.optionOne?.text} />
-                    <DetailPage option={optionTwo} voted={voted} optionQty={{optionOneQty, optionTwoQty}} text={selectedQuestion.optionTwo?.text}/>
+                    <DetailPage option={optionOne} voted={voted} optionPercentage={result1} optionQty={optionOneQty} text={selectedQuestion.optionOne?.text} />
+                    <DetailPage option={optionTwo} voted={voted} optionPercentage={result2} optionQty={optionTwoQty} text={selectedQuestion.optionTwo?.text}/>
                 </div>
             </div>
         </div>

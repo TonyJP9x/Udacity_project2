@@ -3,7 +3,6 @@ import * as _DATA from '../_DATA'
 
 const initialState = {
     value: {},
-    dataFullUser: []
 };
 const authSlice = createSlice({
     name: 'login',
