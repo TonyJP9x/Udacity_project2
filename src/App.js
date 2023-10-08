@@ -13,31 +13,22 @@ import Error404 from "./Error404";
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getAllUsers());
-    // if (!userInfo.id) {
-    //   navigate("/error404");
-    // }
   }, []);
   const userInfo = useSelector((state) => state.login.value);
 
   return (
     <div className="App">
       <Routes>
-      {/* </Routes>
-      {userInfo.id ? (
-        <Routes> */}
-          <Route path="/leaderboard" element={<LeaderBoard />} />
-          <Route path="/add" element={<PollCreationPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/questions/:question_id" element={<PollPage />} />
+        <Route path="/leaderboard" element={<LeaderBoard />} />
+        <Route path="/add" element={<PollCreationPage />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/questions/:question_id" element={<PollPage />} />
         <Route path="/" element={<Login />} />
-          <Route path="*" element={<Error404/>} />
-       
-        </Routes>
-      {/* ) : null} */}
-  
+        <Route path="*" element={<Error404 />} />
+      </Routes>
     </div>
   );
 }

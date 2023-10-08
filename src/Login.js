@@ -33,6 +33,7 @@ function Login(props) {
                     dispatch(login(userInfoValue[i]))
                    
                     navigate('/home')
+                    
                 }
             }
         }    

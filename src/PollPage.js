@@ -32,11 +32,7 @@ function PollPage(props) {
             setOptionTwo(optionTwoValue.includes(currentUser))
         }
     },[userInfo])
-    useEffect(() =>{
-        if(selectedQuestion.id){
 
-        }
-    },[])
     if(optionOne || optionTwo){
         voted = true
     }else{

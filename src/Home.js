@@ -8,7 +8,6 @@ import Question from "./Question";
 import { useNavigate } from "react-router-dom";
 
 function Home(props) {
-  const [answeredList, setAnsweredList] = useState({})
   const [newQuestions, setNewQuestions] = useState([])
   const [answeredQuestions, setAnsweredQuestions] = useState([])
   const navigate  = useNavigate();

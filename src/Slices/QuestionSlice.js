@@ -24,6 +24,7 @@ const questionSlice = createSlice({
             state.value = action.payload
         })
         .addCase('SAVE_QUESTION_ANSWER', (state, action) =>{
+            console.log("state value", state.value, action.payload)
             state.value = action.payload
         })
         .addCase('SAVE_QUESTION', (state, action)=>{
@@ -42,6 +43,7 @@ export const getQuestions = () =>async (dispatch) => {
 
 export const saveQuestionAnswer = (authedUser, qid, answer) => async(dispatch) => {
     const data = await _DATA._saveQuestionAnswer({authedUser, qid, answer})
+    console.log("data",data)
     dispatch({type: 'SAVE_QUESTION_ANSWER', payload: data})
 }
 export const saveQuestion = (question) => async(dispatch) => {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "./Slices/AuthSlice";
 
+
 function NavBar(props) {
   const dispatch = useDispatch();
   const userInfo = useSelector(state => state.login.value)
@@ -14,7 +15,7 @@ function NavBar(props) {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="row" style={{width:'100%'}}>
             <div className="col-10" style={{display:'flex', paddingLeft:'30px'}}>
-              <Link to='/home' className="navbar-brand" >
+              <Link to='/home' className="navbar-brand"  >
                 Home
               </Link>
               <Link to='/leaderboard' className="navbar-brand" >
