@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveQuestionAnswer } from './Slices/QuestionSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import { updateAnswered } from './Slices/AuthSlice';
-import { updateAnsweredQuantity } from './Slices/GlobalStateSlice';
+import DetailPage from './DetailPage';
 
 
 function PollPage(props) {
@@ -14,16 +12,18 @@ function PollPage(props) {
     const [optionTwo, setOptionTwo] = useState('')
     const navigate = useNavigate();
     const userInfo = useSelector((state) => state.login.value);
-    const selectedQuestion = useSelector((state) => state.question.value);
+    const selectedQuestion = useSelector((state) => state.question.valueItem);
     let voted = false;
-    const dispatch = useDispatch()
     const currentUser = userInfo.id
-    console.log("selectedQuestion",selectedQuestion )
 
     useEffect(() => {
         if(!selectedQuestion.id){
             navigate('/')
-        }else{
+        }
+    },[userInfo])
+
+    useEffect(() => {
+        if(selectedQuestion.id){
             let optionOneValue = selectedQuestion.optionOne.votes
             let optionTwoValue = selectedQuestion.optionTwo.votes
             setOptionOneQty(optionOneValue.length)
@@ -31,19 +31,14 @@ function PollPage(props) {
             setOptionOne(optionOneValue.includes(currentUser))
             setOptionTwo(optionTwoValue.includes(currentUser))
         }
-    },[userInfo])
+    },[selectedQuestion])
 
     if(optionOne || optionTwo){
         voted = true
     }else{
         voted = false;
     }
-    const handleOnClick = (item, selectedOption) => {
-        dispatch(saveQuestionAnswer(userInfo.id,item.id,selectedOption))
-        dispatch(updateAnswered({id: item.id, selectedOption}))
-        dispatch(updateAnsweredQuantity({userId: userInfo.id, answeredId: item.id, selectedOption}))
-        // ans: [{id:select}]
-    }
+
     return (
         <div>
             <NavBar />
@@ -52,37 +47,8 @@ function PollPage(props) {
             <h3 hidden={voted}>Would You Rather</h3>
             <div className='container ' style={{paddingTop: '30px', paddingBottom:'30px'}} >
                 <div className='row'>
-                    <div className='col'>
-                        <div className="card " style={optionOne? {backgroundColor: "grey"}:null} >
-                            <div className="card-body">
-                                <p className="card-text">{selectedQuestion.optionOne?.text}</p>
-                                <div hidden={!voted}>
-                                Voted people: {optionOneQty} <br/>
-                                Percentage: {optionOneQty/(optionOneQty + optionTwoQty)*100 + '%'}
-
-                                </div>
-                                <Link to='/home'>
-                                <button hidden={voted} style={{width:'100%'}} type='button 'className="btn btn-outline-primary" onClick={() =>handleOnClick(selectedQuestion, "optionOne")}>Click</button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='col'>
-                    <div className="card" >
-                            <div className="card-body" style={optionTwo? {backgroundColor: "grey"}:null} >
-                                <p className="card-text">{selectedQuestion.optionTwo?.text}</p>
-                                <div hidden={!voted}>
-                                Voted people: {optionTwoQty} <br/>
-                                Percentage: {optionTwoQty/(optionOneQty + optionTwoQty)*100 + '%'}
-
-                                </div>
-                                <Link to='/home'>
-
-                                <button hidden={voted} style={{width:'100%'}} type='button 'className="btn btn-outline-primary" onClick={() => handleOnClick(selectedQuestion, "optionTwo")}>Click</button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+                    <DetailPage option={optionOne} voted={voted} optionQty={{optionOneQty, optionTwoQty}} text={selectedQuestion.optionOne?.text} />
+                    <DetailPage option={optionTwo} voted={voted} optionQty={{optionOneQty, optionTwoQty}} text={selectedQuestion.optionTwo?.text}/>
                 </div>
             </div>
         </div>

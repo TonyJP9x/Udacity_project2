@@ -8,14 +8,15 @@ import { updateCreatedQuestionQty } from './GlobalStateSlice'
 
 
 const initialState = {
-    value: {}
+    value: {},
+    valueItem : {}
 }
 const questionSlice = createSlice({
     name: 'question',
     initialState,
     reducers:{
         newSelectedQuestions: (state, action) => {
-            state.value = action.payload
+            state.valueItem = action.payload
         }
     },
     extraReducers:(builder) => {
