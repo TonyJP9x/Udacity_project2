@@ -30,8 +30,8 @@ function LeaderBoard(props) {
           <tbody>
             {
               userList.sort((a,b) => {
-                const sumA = Object.keys(a.answers).length + a.questions.length
-                const sumB = Object.keys(b.answers).length + b.questions.length
+                const sumA = Object.keys(a?.answers).length + a.questions.length
+                const sumB = Object.keys(b?.answers).length + b.questions.length
                 return sumB - sumA
               }).map(item => (
                 <tr key={item.id}>

@@ -51,7 +51,7 @@ function Home(props) {
 
       <QuestionStatusNav handleAction={selectQuestion} />
       <div>
-        <div className="container" style={{ marginTop: "30px" }}>
+        <div className="container"  style={{ marginTop: "30px" }}>
           <div className="row">
             <Question
               flag={flag}

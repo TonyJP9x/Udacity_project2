@@ -4,10 +4,10 @@ import LeaderBoard from "./LeaderBoard";
 import Login from "./Login";
 import PollCreationPage from "./PollCreationPage";
 import PollPage from "./PollPage";
-import { Route, useNavigate } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getAllUsers } from "./Slices/GlobalStateSlice";
 import Error404 from "./Error404";
 
@@ -17,7 +17,6 @@ function App() {
   useEffect(() => {
     dispatch(getAllUsers());
   }, []);
-  const userInfo = useSelector((state) => state.login.value);
 
   return (
     <div className="App">
