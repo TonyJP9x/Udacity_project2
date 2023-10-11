@@ -1,17 +1,16 @@
-import LeaderBoard from "./LeaderBoard";
+import NavBar from "./NavBar";
 import { render } from "@testing-library/react";
-import * as React from "react";
 import { Provider } from "react-redux";
 import store from "./Store";
 import { MemoryRouter } from "react-router-dom";
 
-describe('leaderboard',() => {
+describe('navigation bar',() => {
 
     it("will have all expected field", () => {
         var component = render(
           <MemoryRouter>
             <Provider store={store}>
-              <LeaderBoard />
+              <NavBar />
             </Provider>
           </MemoryRouter>
         );
