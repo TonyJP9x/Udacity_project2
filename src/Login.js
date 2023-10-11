@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 
 function Login(props) {
-    const  [success, setSuccess] = useState(false)
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const  [success, setSuccess] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userInfo = useSelector(state => state.login)
@@ -34,7 +34,6 @@ function Login(props) {
                  setTimeout(() =>{
                      navigate('/home')
                  }, 1000)
-                 break;
                     
                 }
             }
@@ -44,9 +43,9 @@ function Login(props) {
     return (
         <div>
             <img  src={loginImage}/>
-            {
-            success ? (<h1 data-testid='message' style={{color: 'green'}}>Login successfully !</h1>):null
-            }
+     
+           <h1 data-testid='message' style={{color: 'green'}}>{success? 'Login successfully !' : null}</h1>
+     
             <form >
                 <h1>Login </h1>
                 <h4>User</h4>
@@ -54,9 +53,6 @@ function Login(props) {
                 <h4>Password</h4>
                 <input data-testid='password' type='text' placeholder='Password' style={{'width':'500px', marginBottom:'20px'}} required  value={password} onChange={(e) => setPassword(e.target.value)}/><br/>
                 <button data-testid='button' className='btn btn-primary' type='button' onClick={(e) => handleOnSubmit(e)}>Submit </button>
-             
-                
-                
             </form >
         </div>
     );

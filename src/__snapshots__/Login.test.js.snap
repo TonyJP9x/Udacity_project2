@@ -9,6 +9,10 @@ Object {
         <img
           src="login.jpg"
         />
+        <h1
+          data-testid="message"
+          style="color: green;"
+        />
         <form>
           <h1>
             Login 
@@ -51,6 +55,10 @@ Object {
     <div>
       <img
         src="login.jpg"
+      />
+      <h1
+        data-testid="message"
+        style="color: green;"
       />
       <form>
         <h1>

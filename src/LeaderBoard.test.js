@@ -5,7 +5,6 @@ import Login from "./Login";
 import { Provider } from "react-redux";
 import store from "./Store";
 import { MemoryRouter } from "react-router-dom";
-import GlobalStateSlice from "./Slices/GlobalStateSlice";
 
 describe('leaderboard',() => {
 
@@ -28,7 +27,6 @@ describe('leaderboard',() => {
             </MemoryRouter>
           </Provider>
         );
-    
         const getUserRows = () => container.querySelectorAll('tbody tr');
         const userSum = (user) =>
           Object.keys(user.answers).length + user.questions.length;

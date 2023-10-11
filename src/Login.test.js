@@ -7,10 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 import { waitFor } from "@testing-library/react";
 
 
-const mockSuccessfullogin = {
-  id: 'sarahedo',
-  password:'password123'
-}
+
 
 describe("Login", () => {
   it("will have all expected field", () => {
@@ -23,21 +20,24 @@ describe("Login", () => {
     );
     expect(component).toMatchSnapshot();
   });
-  it("will  display a success message if input correct username or passowrd",  async () => {
+  it('will show message if all mandatory field has been filled', async () => {
     var component = render(
-      <MemoryRouter>
-        <Provider store={store}>
-          <Login />
-        </Provider>
-      </MemoryRouter>
-    );
-
-    fireEvent.change(component.queryByTestId("username"), { target: { value: mockSuccessfullogin.id } });
-    fireEvent.change(component.queryByTestId("password"), { target: { value: mockSuccessfullogin.password } });
-    fireEvent.click(component.queryByTestId("button"));
+        <MemoryRouter>
+          <Provider store={store}>
+            <Login />
+          </Provider>
+        </MemoryRouter>
+      );
+    var option1 = component.getByTestId('username')
+    fireEvent.change(option1, {target: {value:'sarahedo'}})
+    var option2 = component.getByTestId('password')
+    fireEvent.change(option2, {target: {value:'password123'}})
+    var button = component.getByTestId('button')
+    fireEvent.click(button)
     await waitFor(() => {
-      expect(component.queryByTestId("message")).toBeInTheDocument()
+        expect(component.getByTestId('message')).toBeInTheDocument();
     })
 
-  });
+
+})
 });
