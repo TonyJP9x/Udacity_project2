@@ -8,10 +8,9 @@ import { useSelector } from 'react-redux';
 
 
 
-function DetailPage({option,voted, optionPercentage,optionQty, text}) {
+function DetailPage({option,voted, optionPercentage,optionQty, text, selectedQuestion}) {
     const dispatch = useDispatch();
     const userInfo = useSelector((state) => state.login.value);
-    const selectedQuestion = useSelector((state) => state.question.valueItem);
     const handleOnClick = (item, selectedOption) => {
         dispatch(saveQuestionAnswer(userInfo.id,item.id,selectedOption))
         dispatch(updateAnswered({id: item.id, selectedOption}))

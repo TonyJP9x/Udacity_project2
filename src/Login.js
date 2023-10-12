@@ -3,23 +3,26 @@ import loginImage from '../src/img/login.jpg';
 import * as _DATA from '../src/_DATA'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, login } from './Slices/AuthSlice';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 
 
 
 
 function Login(props) {
+    let history = createBrowserHistory()
+    const location = useLocation()
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const  [success, setSuccess] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userInfo = useSelector(state => state.login)
-
-
-
+    const url = userInfo.urlLocation !== '/' ? userInfo.urlLocation : '/home'
+    
     useEffect(() => {
         dispatch(getUsers())
+        
       
     },[])
 
@@ -29,11 +32,12 @@ function Login(props) {
         for (let i = 0; i <userInfoValue.length; i++ ){
             if(userName === userInfoValue[i]['id']){
                 if(password === userInfoValue[i]['password']){
-                    setSuccess(true)
+                
                     dispatch(login(userInfoValue[i]))
-                 setTimeout(() =>{
-                     navigate('/home')
-                 }, 1000)
+                    
+                       navigate(url)
+                 
+            
                     
                 }
             }

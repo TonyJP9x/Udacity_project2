@@ -4,23 +4,37 @@ import LeaderBoard from "./LeaderBoard";
 import Login from "./Login";
 import PollCreationPage from "./PollCreationPage";
 import PollPage from "./PollPage";
-import { Route } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { Routes } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "./Slices/GlobalStateSlice";
 import Error404 from "./Error404";
+import { createBrowserHistory } from "history";
+import { saveUrl } from "./Slices/AuthSlice";
+import { getQuestions } from "./Slices/QuestionSlice";
+
+
 
 function App() {
+  const navigate = useNavigate();
+  const history = createBrowserHistory({
+  })
   const dispatch = useDispatch();
-
+  
+  const userInfo = useSelector(state => state.login.value)
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getQuestions());
+    dispatch(saveUrl(history.location.pathname))
+    navigate('/')
   }, []);
+
+  
 
   return (
     <div className="App">
-      <Routes>
+      <Routes history={history}>
         <Route path="/leaderboard" element={<LeaderBoard />} />
         <Route path="/add" element={<PollCreationPage />} />
         <Route path="/home" element={<Home />} />

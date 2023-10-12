@@ -3,6 +3,7 @@ import * as _DATA from '../_DATA'
 
 const initialState = {
     value: {},
+    urlLocation: ''
 };
 const authSlice = createSlice({
     name: 'login',
@@ -18,6 +19,9 @@ const authSlice = createSlice({
         updateAnswered: (state, action) =>{
             let arr = {...state.value.answers,[action.payload.id]:action.payload.selectedOption}
             state.value = {...state.value,answers: arr}
+        },
+        saveUrl: (state, action) => {
+            state.urlLocation = action.payload
         }
 
     },
@@ -38,5 +42,5 @@ export const getUsers = () =>async (dispatch) => {
 }
 
 
-export const {login, logout, updateAnswered} = authSlice.actions
+export const {login, logout, updateAnswered, saveUrl} = authSlice.actions
 export default authSlice.reducer
